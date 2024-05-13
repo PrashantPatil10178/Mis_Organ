@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Available Organs for Donation</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <section
+      class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+    >
+      <h1 class="mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+        Available Organs for Donation
+      </h1>
+      <div
+        id="organList"
+        class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
+      >
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+          <ul id="organItems" class="space-y-2"></ul>
+          <p
+            id="noOrgansMessage"
+            class="hidden text-sm font-light text-gray-500 dark:text-gray-400"
+          >
+            No organs are currently available for donation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Fetch organ donation data from backend using Axios
+      axios
+        .get("http://localhost:8000/api/v1/users/getAllData")
+        .then((response) => {
+          console.log(response.data);
+          const organs = response.data;
+          const organList = document.getElementById("organItems");
+          if (organs.length === 0) {
+            document
+              .getElementById("noOrgansMessage")
+              .classList.remove("hidden");
+          } else {
+            organs.forEach((organ) => {
+              const li = document.createElement("li");
+              li.classList.add(
+                "flex",
+                "items-center",
+                "justify-between",
+                "px-4",
+                "py-2",
+                "bg-gray-100",
+                "dark:bg-gray-700",
+                "rounded-lg"
+              );
+              li.innerHTML = `
+                            <span class="text-gray-900 dark:text-white">${organ.organPreferences}</span>
+                            <button class="text-blue-600 hover:text-blue-700 focus:outline-none focus:text-blue-800" onclick="HandleRequest()">Request</button>
+                        `;
+              organList.appendChild(li);
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching organ donation data:", error);
+        });
+      function HandleRequest() {
+        console.log("clicked");
+        window.location.href = "./login.html";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login/Sign up</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('/images/loginpage.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        form {
+            margin-top: 20px;
+        }
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        form input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .btn-container {
+            margin-top: 20px;
+        }
+        .btn-container button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .btn-container button:last-child {
+            margin-right: 0;
+        }
+        .btn-container button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Organ Donation</h1>
+        <div class="btn-container">
+            <button id="loginBtn">Login</button>
+            <button id="signupBtn">Sign up</button>
+        </div>
+        <div id="loginForm" style="display: none;">
+            <form id="loginForm" onsubmit="login(event)">
+                <input type="email" id="loginEmail" name="email" placeholder="Email" required><br>
+                <input type="password" id="loginPassword" name="password" placeholder="Password" required><br>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+        <div id="signupForm" style="display: none;">
+            <form id="signupForm" onsubmit="signup(event)">
+                <input type="text" id="name" name="name" placeholder="Name" required><br>
+                <input type="email" id="signupEmail" name="email" placeholder="Email" required><br>
+                <input type="text" id="phone" name="phone" placeholder="Phone Number" required><br>
+                <input type="password" id="signupPassword" name="password" placeholder="Password" required><br>
+                <input type="submit" value="Sign up">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("signupBtn").onclick = function() {
+            document.getElementById("signupForm").style.display = "block";
+            document.getElementById("loginForm").style.display = "none";
+        };
+
+        document.getElementById("loginBtn").onclick = function() {
+            document.getElementById("loginForm").style.display = "block";
+            document.getElementById("signupForm").style.display = "none";
+        };
+
+        function login(event) {
+            event.preventDefault();
+            // You can add your login logic here
+            // For now, just display a success message
+            sendSuccessMessage();
+        }
+
+        function signup(event) {
+            event.preventDefault();
+            // You can add your signup logic here
+            // For now, just display a success message
+            sendSuccessMessage();
+        }
+
+        // Function to send message to parent window after successful login or signup
+        function sendSuccessMessage() {
+            window.parent.postMessage("login_success", "*");
+        }
+    </script>
+</body>
+</html>

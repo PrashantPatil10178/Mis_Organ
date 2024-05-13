@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Organ Donation</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("/images/2.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+      }
+      header {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 20px 0;
+        text-align: center;
+        color: #fff;
+      }
+      header h1 {
+        margin: 0;
+        color: #000; /* Change header text color to black */
+      }
+      nav {
+        margin-top: 20px;
+      }
+      nav a {
+        text-decoration: none;
+        color: #fff;
+        margin: 0 10px;
+        font-size: 18px; /* Reduce font size of navigation links */
+        border-bottom: 1px solid transparent; /* Add transparent border-bottom */
+      }
+      nav a:hover {
+        border-bottom: 1px solid #fff; /* Change border color on hover */
+      }
+      .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Center vertically */
+        margin-top: 50px;
+      }
+      .button-container a {
+        display: block;
+        width: 300px; /* Increase button width */
+        height: 200px; /* Increase button height */
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        margin: 0 20px;
+        text-decoration: none;
+        color: #000; /* Change button text color to black */
+        text-align: center; /* Center text horizontally */
+        line-height: 200px;
+        font-size: 28px; /* Increase font size */
+        transition: all 0.3s;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border: 2px solid transparent; /* Add transparent border */
+      }
+      .button-container a:hover {
+        transform: scale(1.1);
+        border: 2px solid #000; /* Change border color on hover */
+      }
+      .form-container {
+        text-align: center;
+        margin-top: 50px;
+        display: none; /* Hide form by default */
+      }
+      .form-container form {
+        display: inline-block;
+        text-align: left;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+      .form-container form input[type="text"],
+      .form-container form input[type="number"],
+      .form-container form select,
+      .form-container form textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      .form-container form input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border: none;
+      }
+      .form-container form input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+      .form-container form label {
+        font-weight: bold;
+      }
+      .record-container {
+        text-align: center;
+        margin-top: 50px;
+        display: none; /* Hide record table by default */
+      }
+      .record-container table {
+        width: 80%;
+        margin: auto;
+        border-collapse: collapse;
+      }
+      .record-container th,
+      .record-container td {
+        padding: 10px;
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Organ Donation</h1>
+      <nav>
+        <a href="#" id="record-btn">Record of Donations</a> |
+        <a href="#" id="request-btn">Request for Donation</a> |
+        <a href="#" id="donate-btn">Donate Organ</a>
+      </nav>
+    </header>
+
+    <div class="button-container">
+      <a
+        href="#"
+        id="request-link"
+        style="background-image: url('/images/but1.jpg')"
+        onclick="showRequestForm()"
+        >Request for Organ</a
+      >
+      <a
+        href="#"
+        id="donate-link"
+        style="background-image: url('/images/but2.jpg')"
+        onclick="showDonateForm()"
+        >Donate Organ</a
+      >
+      <a
+        href="#"
+        id="record-link"
+        style="background-image: url('/images/but3.jpg')"
+        onclick="showRecord()"
+        >Donation Record</a
+      >
+    </div>
+
+    <!-- Request Form -->
+    <div class="form-container" id="request-form">
+      <form action="#" id="request-form">
+        <label for="name">Name:</label><br />
+        <input type="text" id="name" name="name" required /><br />
+        <label for="phone">Phone Number:</label><br />
+        <input type="text" id="phone" name="phone" required /><br />
+        <label for="age">Age:</label><br />
+        <input type="number" id="age" name="age" required /><br />
+        <select id="bloodGroup" name="bloodGroup">
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+
+        <label for="organ">Organ:</label><br />
+        <select id="organ" name="organ">
+          <option value="heart">Heart</option>
+          <option value="liver">Liver</option>
+          <option value="kidney">Kidney</option>
+          <option value="lung">Lung</option>
+          <option value="pancreas">Pancreas</option>
+          <option value="intestine">Intestine</option></select
+        ><br /><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+
+    <!-- Donate Form -->
+    <div class="form-container" id="donate-form">
+      <form action="#" id="donate-form">
+        <label for="name">Name:</label><br />
+        <input type="text" id="name" name="name" required /><br />
+        <label for="phone">Phone Number:</label><br />
+        <input type="text" id="phone" name="phone" required /><br />
+        <label for="age">Age:</label><br />
+        <input type="number" id="age" name="age" required /><br />
+        <select id="bloodGroup" name="bloodGroup">
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+
+        <label for="organ">Organ:</label><br />
+        <select id="organ" name="organ">
+          <option value="heart">Heart</option>
+          <option value="liver">Liver</option>
+          <option value="kidney">Kidney</option>
+          <option value="lung">Lung</option>
+          <option value="pancreas">Pancreas</option>
+          <option value="intestine">Intestine</option></select
+        ><br />
+        <label for="reason">Reason for Donation:</label><br />
+        <textarea id="reason" name="reason" required></textarea><br /><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+
+    <!-- Donation Record -->
+    <div class="record-container" id="record-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Age</th>
+            <th>Bloodgroup</th>
+            <th>Organ</th>
+          </tr>
+        </thead>
+        <tbody id="record-data"></tbody>
+      </table>
+      <button id="exit-btn">Exit</button>
+    </div>
+
+    <script>
+      function showRequestForm() {
+        document.getElementById("request-form").style.display = "block";
+        document.getElementById("record-table").style.display = "none";
+        document.getElementById("donate-form").style.display = "none";
+      }
+
+      function showDonateForm() {
+        document.getElementById("donate-form").style.display = "block";
+        document.getElementById("record-table").style.display = "none";
+        document.getElementById("request-form").style.display = "none";
+      }
+
+      function showRecord() {
+        document.getElementById("record-table").style.display = "block";
+        document.getElementById("request-form").style.display = "none";
+        document.getElementById("donate-form").style.display = "none";
+      }
+
+      // Exit button event listener
+      document
+        .getElementById("exit-btn")
+        .addEventListener("click", function () {
+          document.getElementById("record-table").style.display = "none";
+          document.getElementById("request-form").style.display = "none";
+          document.getElementById("donate-form").style.display = "none";
+        });
+
+      // Submit form data
+      document.querySelectorAll(".form-container form").forEach((form) => {
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          const formData = new FormData(this);
+          const data = {};
+          formData.forEach((value, key) => {
+            data[key] = value;
+          });
+          const table = document.getElementById("record-data");
+          const row = table.insertRow();
+          const nameCell = row.insertCell(0);
+          const phoneCell = row.insertCell(1);
+          const ageCell = row.insertCell(2);
+          const BloodgroupCell = row.insertCell(3);
+          const organCell = row.insertCell(4);
+          nameCell.textContent = data.name;
+          phoneCell.textContent = data.phone;
+          ageCell.textContent = data.age;
+          BloodgroupCell.textContent = data.bloodGroup; // Corrected line
+          organCell.textContent = data.organ;
+          this.reset();
+        });
+      });
+    </script>
+  </body>
+</html>
